@@ -9,7 +9,7 @@
 using namespace std;
 
 //RandomizePuzzle with a random number of moves, calls both ShiftLeft and Spin functions
-void randomizePuzzle(int numbOfMoves, TopSpin &TopSpinObj1) {
+void randomizePuzzle(int numbOfMoves, TopSpin& TopSpinObj1) {
 	for (int i = 0; i < numbOfMoves; i++)
 	{
 		int random = (rand() % 15) + 1;
@@ -36,7 +36,7 @@ int main()
 		cout << endl;
 	}
 	if (inst == 1)
-	{ 
+	{
 		cout << "*************\n";
 		cout << "To win the game you must form a sequence of numbers ascendingly by shifting and spinning the list\n";
 		cout << "Note that the shifting operation shiifts the numbers not the squared bracket \n";
@@ -59,10 +59,9 @@ int main()
 	cout << "3 - Hard \n";
 	cout << "4 - Extreme \n";
 	cout << "*************\n";
-	int difficulty , size_diff , spin_diff,Health;
-	int countshifts = 0, countspin = 0;
-	choose_dificulty:
-    // this while loop to check if the input is not a number.
+	int difficulty, size_diff, spin_diff, Health, countshift = 0, countspin = 0;
+choose_dificulty:
+	// this while loop to check if the input is not a number.
 
 	while (!(cin >> difficulty)) {
 		cin.clear();
@@ -74,7 +73,7 @@ int main()
 
 	//The following part sets the game specifications
 
- 	if (difficulty == 1)
+	if (difficulty == 1)
 	{
 		Health = 100;
 		size_diff = 8;
@@ -101,17 +100,17 @@ int main()
 	else
 	{
 		cout << "Enter number corresponding to the dificulty \n";
-		goto choose_dificulty; 
+		goto choose_dificulty;
 	}
 	//Create TopSpin object
 
-	TopSpin TopSpinObject(size_diff,spin_diff);
+	TopSpin TopSpinObject(size_diff, spin_diff);
 
 	srand(time(NULL));
 
 	//Number of moves to initalize the puzzle with
 
-	int numOfMoves=rand()%20;
+	int numOfMoves = rand() % 20 + 2;
 
 
 	//Created a function to randomize the puzzle with a random number of shiftLeft function calls and a spin
@@ -127,7 +126,7 @@ int main()
 	//While loop that runs till the user selects Quit or Wins the game
 	while (true)
 	{
-		cout << endl<<"Your health is : " << Health <<"          "<< endl;
+		cout << endl << "Your health is : " << Health << "          " << endl;
 		cout << "---------------------------------------" << endl;
 		cout << endl << "Please choose from the following options enter your choice by entering the corresponding " <<
 			"number: " << endl;
@@ -148,6 +147,7 @@ int main()
 		{
 		case 1:
 		{
+			countshift += 1;
 			int numOfShifts;
 			cout << "Enter number of shifts: ";
 			while (!(cin >> numOfShifts)) {
@@ -156,8 +156,7 @@ int main()
 				cout << "you have to enter a number \n";
 				cout << endl;
 			}
-			countshifts += 1;
-			Wrong_shift :
+		Wrong_shift:
 			cout << endl << "1. Shift right\n";
 			cout << "2. Shift left\n";
 			cout << endl << "Your choice: ";
@@ -210,13 +209,13 @@ int main()
 		case 2:
 		{		auto start = chrono::high_resolution_clock::now();//start counting time 
 		TopSpinObject.spin();
-		Health -= 5;
 		countspin += 1;
+		Health -= 5;
 		auto end = chrono::high_resolution_clock::now();//end of counting time
 		auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start).count();//difference betwen time of start and end
 		cout << "time taken =  " << duration << "  nano seconds" << endl;
-			
-			break;
+
+		break;
 		}
 		case 3:
 		{
@@ -231,19 +230,19 @@ int main()
 		{
 			cout << endl << "Your health is : " << Health << "          " << endl;
 			cout << "Congratulations! You solved the puzzle. \n";
-			cout << "the total number of shifts you use is " << countshifts << endl;
-			cout << "and the total number of spins you use is " << countspin << endl;
+			cout << "the number of shfits you use is " << countshift << endl;
+			cout << "the number of spin you use is " << countspin << endl;
 
 			break;
 			return 0;
 		}
 		//If your health reached zero , you lost
 
-		if (TopSpinObject.isSolved()!=1 && Health<=0)
+		if (TopSpinObject.isSolved() != 1 && Health <= 0)
 		{
 			cout << "Bad luck...Try again \n";
-			cout << "the total number of shifts you use is " << countshifts << endl;
-			cout << "and the total number of spins you use is " << countspin << endl;
+			cout << "the number of shfits you use is " << countshift << endl;
+			cout << "the number of spin you use is " << countspin << endl;
 			break;
 			return 0;
 		}
