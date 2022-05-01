@@ -156,7 +156,7 @@ int main()
 				cout << "you have to enter a number \n";
 				cout << endl;
 			}
-			countshifts = countshifts + numOfShifts;
+			countshifts += 1;
 			Wrong_shift :
 			cout << endl << "1. Shift right\n";
 			cout << "2. Shift left\n";
@@ -211,7 +211,7 @@ int main()
 		{		auto start = chrono::high_resolution_clock::now();//start counting time 
 		TopSpinObject.spin();
 		Health -= 5;
-		countspin = countspin + 1;
+		countspin += 1;
 		auto end = chrono::high_resolution_clock::now();//end of counting time
 		auto duration = chrono::duration_cast<chrono::nanoseconds>(end - start).count();//difference betwen time of start and end
 		cout << "time taken =  " << duration << "  nano seconds" << endl;
